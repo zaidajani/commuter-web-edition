@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Commuter</title>
+    <script src="./app.js" defer></script>
+    <script type="module" src="./setupEditor.js" defer></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css">
+    </link>
+
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js">
+  </script>
+  <script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/javascript/javascript.min.js">
+</script>
+  </head>
+  <body>
+    <div class="mt-4" style="max-width: 600px; margin-left: 70px">
+      <div class="input-group mb-4">
+        <select class="form-select flex-grow-0 w-auto" data-method>
+          <option value="GET" selected>GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="PATCH">PATCH</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+        <input
+          data-url
+          required
+          class="form-control"
+          type="url"
+          placeholder="https://example.com"
+        />
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+
+      <div class="tab">
+        <button
+          class="tablinks"
+          onclick="openCity(event, 'London')"
+          id="defaultOpen"
+        >
+          Headers
+        </button>
+        <button class="tablinks" onclick="openCity(event, 'JSON')">JSON</button>
+      </div>
+
+      <div id="London" class="tabcontent">
+        <div id="headerid">
+          <div class="input-group my-2">
+            <input type="text" class="form-control" placeholder="Key" />
+            <input type="text" class="form-control" placeholder="Value" />
+            <button type="button" class="btn btn-danger deleteheader">
+              Remove
+            </button>
+          </div>
+          <div id="addHeaders"></div>
+        </div>
+        <button class="btn btn-success mt-2" id="add">Add</button>
+      </div>
+
+      <div id="JSON" class="tabcontent">
+        <div class="mt-4" id="data-json-request-body">
+          
+        </div>
+      </div>
+    </div>
+    <script src="./node_modules/@codemirror/lang-json/dist/index"></script>
+    <script src="./node_modules/@codemirror/view/dist/index"></script>
+    <script src="./node_modules/@codemirror/commands/dist/index"></script>
+    <script src="./node_modules/@codemirror/basic-setup/dist/index"></script>
+  </body>
+</html>

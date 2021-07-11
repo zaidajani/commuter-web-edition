@@ -1,0 +1,18 @@
+{
+  "name": "commuter-web-edition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@codemirror/basic-setup": "^0.18.2",
+    "@codemirror/commands": "^0.18.3",
+    "@codemirror/lang-json": "^0.18.0",
+    "@codemirror/view": "^0.18.18"
+  }
+}
