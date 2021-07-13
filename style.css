@@ -7,6 +7,11 @@ body {font-family: Arial;}
   background-color: #ffffff;
 }
 
+.CodeMirror {
+  border: 1px solid #888; 
+  border-radius: 4px;
+}
+
 /* Style the buttons inside the tab */
 .tab button {
   background-color: inherit;
