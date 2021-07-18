@@ -90,18 +90,14 @@ send.addEventListener("click", async () => {
       updateResponse(resp);
       break;
     case "POST":
-      axios.post({
-        url: sendform.value,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-        data: editor.getValue()
-      }).then((response) => {
-        responseeditor.setValue(response.data);
-        console.log(response.data);
-      }, (error) => {
-        responseeditor.setValue(error);
-      });
+      let response = await axios
+        .post(sendform.value, editor.getValue())
+        .then((response) => {
+          return response;
+        });
+      responseeditor.setValue(JSON.stringify(response.data, undefined, 2));
+      console.log(response);
+
       break;
     case "PUT":
       console.log("put");
