@@ -1,6 +1,7 @@
 const add = document.getElementById("add");
 const headers = document.getElementById("headerid");
 let headercount = 1;
+let headersname = [];
 const send = document.getElementById("send");
 const editorvar = document.getElementById("editor");
 const opt = document.getElementById("operation");
@@ -91,12 +92,18 @@ send.addEventListener("click", async () => {
       break;
     case "POST":
       let response = await axios
-        .post(sendform.value, editor.getValue())
+        .post(
+          sendform.value,
+          JSON.parse(editor.getValue(), {
+            headers: {},
+          })
+        )
         .then((response) => {
           return response;
         });
       responseeditor.setValue(JSON.stringify(response.data, undefined, 2));
       console.log(response);
+      console.log(returnHeaders());
 
       break;
     case "PUT":
@@ -111,6 +118,22 @@ send.addEventListener("click", async () => {
       break;
   }
 });
+
+function returnHeaders() {
+  for (let i = 0; i < headercount; i++) {
+    let key = document.getElementById(`parameterKey${i + 1}`); 
+    let val = document.getElementById(`parameterValue${i + 1}`);
+    
+    const obj = {
+      key: key.value,
+      value: val.value
+    }
+
+    headersname.push(obj);
+
+    return headersname;
+  }
+}
 
 function updateResponse(object) {
   response.innerHTML = `
