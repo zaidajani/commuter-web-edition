@@ -5,6 +5,7 @@ let headersname = [];
 const send = document.getElementById("send");
 const editorvar = document.getElementById("editor");
 const opt = document.getElementById("operation");
+const headersIncome = document.getElementById("headersIncome");
 const sendform = document.getElementById("sendform");
 const response = document.getElementById("response");
 
@@ -115,6 +116,14 @@ send.addEventListener("click", async () => {
         });
       responseeditor.setValue(JSON.stringify(response.data, undefined, 2));
       console.log(response);
+
+      headersIncome.style.display = 'block';
+
+      for (let i = 0; i < response.headers.length; i++) {
+        headersIncome.innerHTML += `
+          ${header[i].key}: ${header[i].value}<br/>
+        `;
+      }
       break;
     case "PUT":
       console.log("put");
