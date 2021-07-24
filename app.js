@@ -121,8 +121,9 @@ send.addEventListener("click", async () => {
 
       for (let i = 0; i < response.headers.length; i++) {
         headersIncome.innerHTML += `
-          ${header[i].key}: ${header[i].value}<br/>
+          ${response.headers[i].key}: ${response.headers[i].value}<br/>
         `;
+        console.log(`${response.headers[i].key}: ${response.headers[i].value}`);
       }
       break;
     case "PUT":
