@@ -7,7 +7,7 @@ const editorvar = document.getElementById("editor");
 const opt = document.getElementById("operation");
 const headersIncome = document.getElementById("headersIncome");
 const sendform = document.getElementById("sendform");
-const response = document.getElementById("response");
+const responsecard = document.getElementById("response");
 
 add.addEventListener("click", () => {
   const addHeaders = document.getElementById("addHeaders");
@@ -67,11 +67,29 @@ const responseeditor = CodeMirror.fromTextArea(
   }
 );
 
+const headerseditor = CodeMirror.fromTextArea(
+  document.getElementById("headerseditor"), 
+  {
+    mode: "application/json",
+    lineNumbers: true,
+    autoRefresh: true,
+    autoCloseBrackets: true,
+    readOnly: true,
+  }
+);
+
+headerseditor.setSize("100%", "100px");
+
 responseeditor.setSize("100%", "250px");
 
 responseeditor.setValue(
   "{\n\t'Message': 'Hit the send button to get a response'\n}"
 );
+
+headerseditor.setValue(
+  "{\n\t'Message': 'Hit the send button to get a response headers'\n}"
+);
+
 setTimeout(() => {
   editor.refresh();
 }, 1);
@@ -90,6 +108,8 @@ send.addEventListener("click", async () => {
       console.log(resp);
 
       updateResponse(resp);
+
+      headerseditor.setValue(JSON.stringify(resp.headers, undefined, 2));
       break;
     case "POST":
       for (let i = 0; i < headercount; i++) {
@@ -106,7 +126,7 @@ send.addEventListener("click", async () => {
 
       let response = await axios
         .post(
-          sendform.value,
+          `${sendform.value}`,
           JSON.parse(editor.getValue(), {
             headers: headersname,
           })
@@ -119,12 +139,9 @@ send.addEventListener("click", async () => {
 
       headersIncome.style.display = 'block';
 
-      for (let i = 0; i < response.headers.length; i++) {
-        headersIncome.innerHTML += `
-          ${response.headers[i].key}: ${response.headers[i].value}<br/>
-        `;
-        console.log(`${response.headers[i].key}: ${response.headers[i].value}`);
-      }
+      console.log(response.headers);
+      headerseditor.setValue(JSON.stringify(response.headers, undefined, 2));
+
       break;
     case "PUT":
       console.log("put");
@@ -140,7 +157,7 @@ send.addEventListener("click", async () => {
 });
 
 function updateResponse(object) {
-  response.innerHTML = `
+  responsecard.innerHTML = `
     <div class="card" style="width: 100%;" id="response">
       <div class="card-body">
         <h5 class="card-title">Response</h5>
